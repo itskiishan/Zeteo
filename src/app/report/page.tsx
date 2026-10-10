@@ -9,7 +9,6 @@ import type { User } from "@supabase/supabase-js";
 import type { Database, ItemStatus } from "@/types/database";
 import TimeInput12Hour from "@/components/TimeInput12Hour";
 import { convert12HourTo24Hour, validate12HourTime } from "@/lib/timeUtils";
-import VoiceInput from "@/components/VoiceInput";
 
 const REPORT_CATEGORIES = [
   "Electronics",
@@ -389,12 +388,14 @@ export default function ReportPage() {
                   <label htmlFor="title" className="block text-xs font-semibold text-[#171717] mb-1">
                     Item Name <span className="text-[#C94A4A]">*</span>
                   </label>
-                  <VoiceInput
+                  <input
+                    id="title"
+                    type="text"
+                    required
                     value={title}
-                    onChange={setTitle}
+                    onChange={(e) => setTitle(e.target.value)}
                     placeholder="e.g. Black leather wallet, Blue Milton bottle, AirPods Pro"
-                    fieldName="title"
-                    maxLength={100}
+                    className="w-full rounded-xl border border-[#E8E6E1] bg-[#FAFAF8] px-3.5 py-2.5 text-xs text-[#171717] placeholder-[#6B6B67] focus:border-[#7A1F2B] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#7A1F2B]/15"
                   />
                 </div>
 
@@ -420,14 +421,15 @@ export default function ReportPage() {
                   <label htmlFor="description" className="block text-xs font-semibold text-[#171717] mb-1">
                     Description <span className="text-[#C94A4A]">*</span>
                   </label>
-                  <VoiceInput
-                    value={description}
-                    onChange={setDescription}
-                    placeholder="Describe the item, including color, brand, unique markings, or identifying features..."
-                    fieldName="description"
-                    maxLength={1000}
-                    multiline={true}
+                  <textarea
+                    id="description"
                     rows={3}
+                    maxLength={1000}
+                    required
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    placeholder="Describe the item, including color, brand, unique markings, or identifying features..."
+                    className="w-full rounded-xl border border-[#E8E6E1] bg-[#FAFAF8] px-3.5 py-2.5 text-xs text-[#171717] placeholder-[#6B6B67] focus:border-[#7A1F2B] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#7A1F2B]/15"
                   />
                   <p className="mt-1 text-[10px] text-[#6B6B67] text-right">
                     {description.length}/1000 characters
